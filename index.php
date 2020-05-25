@@ -2,22 +2,6 @@
 
 error_reporting(E_ALL);
 
-if (isset($x)) {
-  $x = $_POST['x'];
-} else {
-  $x = '';
-}
-if (isset($y)) {
-  $y = $_POST['y'];
-} else {
-  $y = '';
-}
-if (isset($action)) {
-  $action = $_POST['action'];
-} else {
-  $action = '';
-}
-
 function calculate($x, $y, $action)
 {
   switch ($action) {
@@ -33,6 +17,8 @@ function calculate($x, $y, $action)
     case "/":
       $res = $x / $y;
       break;
+    default:
+      $res = null;
   }
 
   if ($y == 0) {
@@ -40,8 +26,25 @@ function calculate($x, $y, $action)
   }
   return $res;
 }
-$res = calculate($x, $y, $action);
 
+
+if (isset($_POST['x'])) {
+  $x = (int)$_POST['x'];
+} else {
+  $x = null;
+}
+if (isset($_POST['y'])) {
+  $y = (int)$_POST['y'];
+} else {
+  $y = null;
+}
+if (isset($_POST['action'])) {
+  $action = $_POST['action'];
+} else {
+  $action = null;
+}
+
+$res = calculate($x, $y, $action);
 ?>
 
 <!-- POST -->
