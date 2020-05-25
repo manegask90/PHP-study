@@ -1,28 +1,53 @@
 <?php
 
-// GET
-// $a = [
-//   'jan' => 1,
-//   'feb' => 2,
-//   'mar' => 3,
-//   'apr' => 4,
-// ];
-// $code = $_GET['code'];
-
-// echo $a[$code];
-
 $x = $_POST['x'];
 $y = $_POST['y'];
+$action = $_POST['action'];
 
-$res = $x + $y;
-// var_dump($_POST);
+function calculate($x, $y, $action) 
+{
+  switch ($action) {
+    case "+":
+      $res = $x + $y;
+      break;
+    case "-":
+      $res = $x - $y;
+      break;
+    case "*":
+      $res = $x * $y;
+      break;
+    case "/":
+      $res = $x / $y;
+      break;
+
+  }
+  return $res;
+}
+$res = calculate($_POST['x'], $_POST['y'], $_POST['action']);
+
 ?>
 
 <!-- POST -->
 
 <form action="/" method="post">
   <input type="number" name="x">
-  +
+  <div>
+    <input type="radio" id="plus"
+     name="action" value="+">
+     <label for="plus">+</label>
+
+    <input type="radio" id="minus"
+     name="action" value="-">
+     <label for="minus">-</label>
+
+    <input type="radio" id="multiplication"
+     name="action" value="*">
+     <label for="multiplication">*</label>
+    
+    <input type="radio" id="division"
+     name="action" value="/">
+     <label for="division">/</label>
+  </div>
   <input type="number" name="y">
   <input type="submit" value="=">
 
