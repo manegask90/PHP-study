@@ -1,11 +1,12 @@
-<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 <?php
+
+error_reporting(E_ALL);
 
 $x = $_POST['x'];
 $y = $_POST['y'];
 $action = $_POST['action'];
 
-function calculate($x, $y, $action) 
+function calculate($x, $y, $action)
 {
   switch ($action) {
     case "+":
@@ -58,6 +59,7 @@ $res = calculate($_POST['x'], $_POST['y'], $_POST['action']);
   Res: <?php echo $res; ?>
 </form>
 
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 <script>
   $(document).ready(function) {
     $(form).on('submit', function(e) {
