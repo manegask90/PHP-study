@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 <?php
 
 $x = $_POST['x'];
@@ -19,7 +20,10 @@ function calculate($x, $y, $action)
     case "/":
       $res = $x / $y;
       break;
+  }
 
+  if ($y == 0) {
+    $res = "Cannot be divided by zero";
   }
   return $res;
 }
@@ -53,3 +57,11 @@ $res = calculate($_POST['x'], $_POST['y'], $_POST['action']);
 
   Res: <?php echo $res; ?>
 </form>
+
+<script>
+  $(document).ready(function) {
+    $(form).on('submit', function(e) {
+
+    })
+  });
+</script>
