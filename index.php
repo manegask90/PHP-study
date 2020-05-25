@@ -2,32 +2,7 @@
 
 error_reporting(E_ALL);
 
-function calculate($x, $y, $action)
-{
-  switch ($action) {
-    case "+":
-      $res = $x + $y;
-      break;
-    case "-":
-      $res = $x - $y;
-      break;
-    case "*":
-      $res = $x * $y;
-      break;
-    case "/":
-      if ($y == 0) {
-        $res = "Cannot be divided by zero";
-      } else {
-        $res = $x / $y;
-      }
-      break;
-    default:
-      $res = null;
-  }
-
-  return $res;
-}
-
+require __DIR__ . '/helpers/functions.php';
 
 if (isset($_POST['x'])) {
   $x = (int)$_POST['x'];
@@ -78,12 +53,3 @@ $res = calculate($x, $y, $action);
   }
 ?>
 </form>
-
-<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('form').on('submit', function(e) {
-
-    });
-  });
-</script>
