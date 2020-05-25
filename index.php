@@ -15,15 +15,16 @@ function calculate($x, $y, $action)
       $res = $x * $y;
       break;
     case "/":
-      $res = $x / $y;
+      if ($y == 0) {
+        $res = "Cannot be divided by zero";
+      } else {
+        $res = $x / $y;
+      }
       break;
     default:
       $res = null;
   }
 
-  if ($y == 0) {
-    $res = "Cannot be divided by zero";
-  }
   return $res;
 }
 
@@ -50,7 +51,7 @@ $res = calculate($x, $y, $action);
 <!-- POST -->
 
 <form action="/" method="post">
-  <input type="number" name="x">
+  <input type="number" name="x" value="<?php echo $x; ?>">
   <div>
     <input type="radio" id="plus"
      name="action" value="+">
@@ -68,10 +69,14 @@ $res = calculate($x, $y, $action);
      name="action" value="/">
      <label for="division">/</label>
   </div>
-  <input type="number" name="y">
+  <input type="number" name="y" value="<?php echo $y; ?>">
   <input type="submit" value="=">
 
-  Res: <?php echo $res; ?>
+<?php 
+  if ($res) {
+    echo "Res: $res";
+  }
+?>
 </form>
 
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
