@@ -2,9 +2,21 @@
 
 error_reporting(E_ALL);
 
-$x = $_POST['x'];
-$y = $_POST['y'];
-$action = $_POST['action'];
+if (isset($x)) {
+  $x = $_POST['x'];
+} else {
+  $x = '';
+}
+if (isset($y)) {
+  $y = $_POST['y'];
+} else {
+  $y = '';
+}
+if (isset($action)) {
+  $action = $_POST['action'];
+} else {
+  $action = '';
+}
 
 function calculate($x, $y, $action)
 {
@@ -28,7 +40,7 @@ function calculate($x, $y, $action)
   }
   return $res;
 }
-$res = calculate($_POST['x'], $_POST['y'], $_POST['action']);
+$res = calculate($x, $y, $action);
 
 ?>
 
@@ -61,9 +73,9 @@ $res = calculate($_POST['x'], $_POST['y'], $_POST['action']);
 
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 <script>
-  $(document).ready(function) {
-    $(form).on('submit', function(e) {
+  $(document).ready(function() {
+    $('form').on('submit', function(e) {
 
-    })
+    });
   });
 </script>
