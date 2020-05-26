@@ -4,52 +4,42 @@ error_reporting(E_ALL);
 
 require __DIR__ . '/helpers/functions.php';
 
-if (isset($_POST['x'])) {
-  $x = (int)$_POST['x'];
-} else {
-  $x = null;
-}
-if (isset($_POST['y'])) {
-  $y = (int)$_POST['y'];
-} else {
-  $y = null;
-}
-if (isset($_POST['action'])) {
-  $action = $_POST['action'];
-} else {
-  $action = null;
+$post = $_POST;
+
+$x      = '';
+$y      = '';
+$action = '';
+$res    = '';
+
+if ($post) {
+
+    $x = $post['x'];
+    $y = $post['y'];
+    $action = $post['action'];
+
+    $res = calculate($x, $y, $action);
 }
 
-$res = calculate($x, $y, $action);
 ?>
 
-<!-- POST -->
 
 <form action="/" method="post">
-  <input type="number" name="x" value="<?php echo $x; ?>">
+  <input type="number" name="x" value="">
+
   <div>
-    <input type="radio" id="plus"
-     name="action" value="+">
+    <input type="radio" name="action" value="plus">
      <label for="plus">+</label>
 
-    <input type="radio" id="minus"
-     name="action" value="-">
+    <input type="radio" name="action" value="minus">
      <label for="minus">-</label>
 
-    <input type="radio" id="multiplication"
-     name="action" value="*">
+    <input type="radio" name="action" value="multiplication">
      <label for="multiplication">*</label>
     
-    <input type="radio" id="division"
-     name="action" value="/">
+    <input type="radio" id="division" name="action" value="division">
      <label for="division">/</label>
   </div>
-  <input type="number" name="y" value="<?php echo $y; ?>">
-  <input type="submit" value="=">
 
-<?php 
-  if ($res) {
-    echo "Res: $res";
-  }
-?>
+  <input type="number" name="y" value="">
+  <input type="submit" value="Go"> <?php if($res) echo 'Result : '.$res;?>
 </form>
