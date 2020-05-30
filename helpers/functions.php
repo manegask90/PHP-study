@@ -17,19 +17,19 @@ const ACTION_DIVISION       = 'division';
  *
  * @throws Exception
  */
-function calculate($x,  $y, $action): float
+function calculate(int $x, int $y, string $action): float
 {
     switch ($action) {
-        case "plus":
+        case ACTION_PLUS:
             $res = $x + $y;
             break;
-        case "minus":
+        case ACTION_MINUS:
             $res = $x - $y;
             break;
-        case "multiplication":
+        case ACTION_MULTIPLICATION:
             $res = $x * $y;
             break;
-        case "division":
+        case ACTION_DIVISION:
             if (!$y) {
                 throw new Exception('Cannot be divided by zero.');
             }
@@ -37,5 +37,8 @@ function calculate($x,  $y, $action): float
             break;
     }
 
+    if (!$x || !$y) {
+      
+    }
     return $res;
 }
