@@ -1,62 +1,43 @@
 <?php
 include __DIR__ . '/header.php';
 
-error_reporting(E_ALL);
+$post = $_POST;
 
-require __DIR__ . '/helpers/functions.php';
+$x      = '';
+$y      = '';
+$action = '';
+$res    = '';
 
-if (isset($_POST['x'])) {
-  $x = (int)$_POST['x'];
-} else {
-  $x = null;
-}
-if (isset($_POST['y'])) {
-  $y = (int)$_POST['y'];
-} else {
-  $y = null;
-}
-if (isset($_POST['action'])) {
-  $action = $_POST['action'];
-} else {
-  $action = null;
-}
+if ($post) {
 
-$res = calculate($x, $y, $action);
+    $x = $post['x'];
+    $y = $post['y'];
+    $action = $post['action'];
+
+    try {
+      $res = calculate($x, $y, $action);
+    } catch (Exception $e) {
+      $res = $e->getMessage();
+    } catch (TypeError $ex) {
+      $res = 'Please enter data';
+    }
+}
 ?>
 
-<!-- POST -->
-<div class="container">
-  <div class="row">
-    <form action="/" method="post">
-      <input type="number" name="x" value="<?php echo $x; ?>">
-      <div>
-        <input type="radio" id="plus"
-        name="action" value="+">
-        <label for="plus">+</label>
 
-        <input type="radio" id="minus"
-        name="action" value="-">
-        <label for="minus">-</label>
+<form action="/" method="post">
+  <input type="number" name="x" value="<?php echo $x; ?>">
 
-        <input type="radio" id="multiplication"
-        name="action" value="*">
-        <label for="multiplication">*</label>
-        
-        <input type="radio" id="division"
-        name="action" value="/">
-        <label for="division">/</label>
-      </div>
-      <input type="number" name="y" value="<?php echo $y; ?>">
-      <input type="submit" value="=">
+  <select name="action">
+    <option value="plus" <?php if (ACTION_PLUS == $action) { ?> selected <?php } ?>>+</option>
+    <option value="minus" <?php if (ACTION_MINUS == $action) { ?> selected <?php } ?>>-</option>
+    <option value="multiplication" <?php if (ACTION_MULTIPLICATION == $action) { ?> selected <?php } ?>>*</option>
+    <option value="division" <?php if (ACTION_DIVISION == $action) { ?> selected <?php } ?>>/</option>
+  </select>
 
-    <?php 
-      if ($res) {
-        echo "Res: $res";
-      }
-    ?>
-    </form>
-  </div>
-</div>
+  <input type="number" name="y" value="<?php echo $y; ?>">
+  <input type="submit" value="Go"> <?php if($res) echo 'Result : '.$res;?>
+</form>
 
 <?php
 include __DIR__ . '/footer.php';
