@@ -25,7 +25,7 @@
           <a class="nav-link" href="/calc.php">Calculate</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/photo.php">Gallery</a>
+          <a class="nav-link" href="/photo-gallery.php">Gallery</a>
         </li>
       </ul>
     </div>

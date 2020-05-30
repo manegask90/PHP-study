@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/header.php';
+require __DIR__ . '/helpers/functions.php';
 
 $post = $_POST;
 
@@ -25,7 +26,7 @@ if ($post) {
 ?>
 
 
-<form action="/" method="post">
+<form action="/calc.php" method="post">
   <input type="number" name="x" value="<?php echo $x; ?>">
 
   <select name="action">

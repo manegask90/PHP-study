@@ -42,3 +42,6 @@ function calculate(int $x, int $y, string $action): float
     }
     return $res;
 }
+
+// Gallery
+$images = ['img-1.jpg', 'img-2.jpg', 'img-3.jpg'];
