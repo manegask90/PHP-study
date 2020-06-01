@@ -2,42 +2,39 @@
 
 error_reporting(E_ALL);
 
-require __DIR__ . '/helpers/functions.php';
+require_once 'vendor/autoload.php';
 
-$post = $_POST;
+use Services\Calculator;
 
-$x      = '';
-$y      = '';
-$action = '';
-$res    = '';
+$message = '';
 
-if ($post) {
-
-    $x = $post['x'];
-    $y = $post['y'];
-    $action = $post['action'];
-
+if ($data = $_POST) {
     try {
-      $res = calculate($x, $y, $action);
+        $calculator = new Calculator($data);
+        $result = $calculator->calculate();
+
     } catch (Exception $e) {
-      $res = $e->getMessage();
-    } catch (TypeError $ex) {
-      $res = 'Please enter data';
+        $message = $e->getMessage();
     }
 }
+
 ?>
 
-
 <form action="/" method="post">
-  <input type="number" name="x" value="<?php echo $x; ?>">
+    <span><?=$message;?></span>
+    <input type="number" name="x">
 
-  <select name="action">
-    <option value="plus" <?php if (ACTION_PLUS == $action) { ?> selected <?php } ?>>+</option>
-    <option value="minus" <?php if (ACTION_MINUS == $action) { ?> selected <?php } ?>>-</option>
-    <option value="multiplication" <?php if (ACTION_MULTIPLICATION == $action) { ?> selected <?php } ?>>*</option>
-    <option value="division" <?php if (ACTION_DIVISION == $action) { ?> selected <?php } ?>>/</option>
-  </select>
+    <select name="action">
+        <option value="plus">+</option>
+        <option value="minus">-</option>
+        <option value="multiplication">*</option>
+        <option value="division">/</option>
+    </select>
 
-  <input type="number" name="y" value="<?php echo $y; ?>">
-  <input type="submit" value="Go"> <?php if($res) echo 'Result : '.$res;?>
+    <input type="number" name="y" >
+    <input type="submit" value="Go"> <?php if(isset($result)) echo 'Result : '.$result;?>
 </form>
+
+
+
+

@@ -1,0 +1,17 @@
+{
+    "name": "user/vim",
+    "require": {
+        "nesbot/carbon": "^2.35"
+    },
+    "authors": [
+        {
+            "name": "Igor Duda",
+            "email": "igorduda91@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Services\\": "Services"
+        }
+    }
+}
