@@ -6,13 +6,10 @@ require_once 'vendor/autoload.php';
 
 use Services\Calculator;
 
-$message = '';
-
 if ($data = $_POST) {
     try {
         $calculator = new Calculator($data);
-        $result = $calculator->calculate();
-
+        $result     = $calculator->calculate();
     } catch (Exception $e) {
         $message = $e->getMessage();
     }
@@ -21,7 +18,7 @@ if ($data = $_POST) {
 ?>
 
 <form action="/" method="post">
-    <span><?=$message;?></span>
+    <span><?php if(isset($message)) echo 'Error : '.$message;?></span>
     <input type="number" name="x">
 
     <select name="action">
