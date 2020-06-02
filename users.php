@@ -5,19 +5,16 @@ require __DIR__ . '/helpers/functions.php';
 
 <div class="container">
   <div class="row">
-    <div class="photo">
-      <?php foreach ($images as $image) { ?>
-        <a href="/image.php?file=<?php echo $image; ?>">
-          <img src="/images/<?php echo $image; ?>" alt="">
-        </a>
-      <?php } ?>
+    <div class="col-md-12 users">
     </div>
   </div>
   <div class="row">
-    <form action="/upload.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="new_image">
-        <input type="submit">
-    </form>
+    <div class="col-md-12 users-form">
+      <form action="/users.php" method="post">
+        <input type="text" name="new_user" placeholder="New User">
+        <input type="submit" value="Add">
+      </form>
+    </div>
   </div>
 </div>
 
